@@ -77,9 +77,8 @@ jobs:
         run: dotnet test --verbosity normal
         
   production: 
-    needs: testStaging
     runs-on: ubuntu-latest
-    if: github.base_ref == 'staging'
+    if: github.base_ref == 'main'
     environment: 
       name: Production
       url: https://github.com/Potatismoose/Parkeringshuset/tree/main
@@ -90,7 +89,7 @@ jobs:
       # solution for the release job: https://stackoverflow.com/questions/60963759/use-github-actions-to-create-a-tag-but-not-a-release
   release:
     needs: production
-    if: github.base_ref == 'staging'
+    if: github.base_ref == 'main'
     name: Release
     runs-on: ubuntu-latest
     steps:
